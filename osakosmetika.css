@@ -1,0 +1,17 @@
+body {
+background-color: black;
+height: 100%;
+
+
+}
+
+.tlacitko{
+background-color: black;
+color: white;
+border-color:#ff0000ff;
+border-width: 5px;
+margin-top: 20px;
+
+width: 200px;
+height: 50px;
+}

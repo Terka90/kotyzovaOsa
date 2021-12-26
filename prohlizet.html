@@ -1,0 +1,93 @@
+<html>
+<head>
+    <title>Časová osa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="databaze.js"></script>
+    <script src="ostatnijs.js"></script>
+    <link rel="stylesheet" href="osakosmetika.css">
+
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="row" >
+
+    <div class="col-sm-9" style="color: white; margin-top: 50px; margin-left: 50px; margin-bottom: 50px; ">
+        <h1 style="font-size: 70px;">Časová osa</h1>
+        <h2 style="color: #ff0000ff; ">Zaznamenejte důležitý milník Vašeho života.</h2>
+    </div>
+
+    <div class="col-sm-2" style="text-align: right;">
+        <button type="button" class="tlacitko" onclick=" " style="background-color: red; color: black;">Přihlášeno</button>
+        <button type="button" class="tlacitko" onclick="odhlasit()">Odhlásit</button>
+    </div>
+
+
+
+
+</div>
+<script>
+
+        function prohlizetData(){
+            window.location.replace("prohlizet.html");
+        }
+        function novaOsaVytvor(){
+            window.location.replace("novaOsa.html");
+        }
+
+        function novaUdalostVlozit(){
+            window.location.replace("novaOsa.html");
+        }
+
+</script>
+
+<div class="row" >
+
+    <div class="col-sm-3" id="menu" style="background-color: white; width: auto; height: 380px; ">
+        <button type="button" class="tlacitko" onclick="prohlizetData()" style="margin: 20px;">Prohlížet události</button>
+        <button type="button" class="tlacitko" onclick="novaOsaVytvor()" style="margin: 20px;">Nová osa</button>
+        <button type="button" class="tlacitko" onclick="novaUdalostVlozit()" style="margin: 20px;">Nová událost</button>
+    </div>
+
+
+    <div class="col-sm-9" id="hlavni" style="background-color: white; width: auto; height: 380px; ">
+        <label for="osa" style="margin-top: 20 px;">Vyberte osu pro prohlížení.</label>
+        <select name="osa" id="osa">
+            <option value="prvni">prvni</option>
+            <option value="druha">druha</option>
+            <option value="treti">treti</option>
+            <option value="ctvrta">ctvrta</option>
+        </select>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="row" >
+
+    <div class="col-sm-12" id="obrOsa" style="background-color: black; width: auto; height: 150px;">
+        <img src="osaOb.png" alt="osaObr" style="height: 100%;">
+    </div>
+
+</div>
+
+
+</body>
+</html>
+
