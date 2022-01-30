@@ -6,37 +6,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="databaze.js"></script>
-    <script src="ostatnijs.js"></script>
+
     <link rel="stylesheet" href="osakosmetika.css">
-
-
-
 
 
 </head>
 
 <body>
 
-
 <div class="row" >
 
     <div class="col-sm-9" style="color: white; margin-top: 50px; margin-left: 50px; margin-bottom: 50px; ">
-        <h1 style="font-size: 70px;">Časová osa</h1>
-        <h2 style="color: #ff0000ff; ">Zaznamenejte důležitý milník Vašeho života.</h2>
+        <iframe class="titulka" src="titulnistr.html" scrolling="no";></iframe>
     </div>
 
     <div class="col-sm-2" style="text-align: right;">
-        <button type="button" class="tlacitko" onclick="novy()">Nový uživatel</button>
-        <button type="button" class="tlacitko" onclick="stavajici()">Již existující uživatel</button>
+        <button type="button" class="tlacitko" onclick="window.location='osanovy.html'">Nový uživatel</button>
+        <button type="button" class="tlacitko" onclick="window.location='osastavajici.html'">Již existující uživatel</button>
     </div>
 
-
-
-
 </div>
-
-
-
 
 <div class="row" >
 
@@ -44,38 +33,39 @@
         <h2>Nový uživatel</h2>
         <p>Pokud jste na této stránce poprvé, bylo by dobré vyplnit pár údajů, potřebných k vaší registraci. Poté můžete začít vesele vkládat své životní události.</p>
         <div class="row">
-            <div class="col-sm-2" >
-                <form action="" name="novyUzivatel" method="get">
-                    <label for="fname">Jméno:</label><br>
-                    <label for="lname">Příjmení:</label><br>
-                    <label for="vek">Věk:</label><br>
-                    <label for="username">Uživatelské jméno:</label><br>
-                    <label for="pass">Heslo:</label><br>
-                    <br>
-                    <input type="button" value="Registrovat" onclick="zjistiJm()">
-
-                    <input type="button" value="Vypis" onclick="vypisJmena()">
+            <div class="col-sm-5" >
 
 
-                </form>
+                    <fieldset>
+                        <p>
+                            <label for="userName">Uživatelské jméno:</label>
+                            <input type="text" id="userName" placeholder="Uživatelské jméno" required />
+                        </p>
+                        <p>
+                            <label for="fName">Jméno:</label>
+                            <input type="text" id="fName" value="" required />
+                        </p>
+                        <p>
+                            <label for="lName">Příjmení:</label>
+                            <input type="text" id="lName" value="" required />
+                        </p>
+                        <p>
+                            <label for="age">Věk:</label>
+                            <input type="text" inputmode="numeric" pattern=[\d]+ id="age" required />
+                        </p>
+                        <p>
+                            <button id="reg" onclick="registruj();">Vytvoř účet</button>
+                        </p>
+
+                    </fieldset>
+
+
             </div>
 
 
-            <div class="col-sm-2">
-                <form action="" name="novyUzivatel" method="get">
-                    <input type="text" id="fname" name="fname" value="" style="margin: 2px"><br>
-                    <input type="text" id="lname" name="lname" value="" style="margin: 2px"><br>
-                    <input type="text" id="vek" name="vek" value="" style="margin: 2px"><br>
-                    <input type="text" id="username" name="username" value="" style="margin: 2px"><br>
-                    <input type="password" id="pass" name="pass" value="" style="margin: 2px"><br>
-                    <br>
-                </form>
-            </div>
+            <div class="col-sm-6" >
 
 
-            <div class="col-sm-8" >
-
-                <p id="demo"></p>
 
 
 
@@ -90,67 +80,11 @@
 </div>
 
 
-
-
-
-<script>
-
-function zjistiJm(){
-        var jm = document.getElementById("fname").value;
-        var pr = document.getElementById("lname").value;
-        var v = document.getElementById("vek").value;
-        var un = document.getElementById("username").value;
-        var ps = document.getElementById("pass").value;
-
-        const uzivatelInfo = [jm, pr, v, un, ps];
-
-        alert("Vítej uživateli " + un );
-
-
-    window.location.replace("osastavajici.html");
-}
-
-
-function vypisJmena(){
-
-        var jm = document.getElementById("fname").value;
-        var pr = document.getElementById("lname").value;
-        var v = document.getElementById("vek").value;
-        var un = document.getElementById("username").value;
-        var ps = document.getElementById("pass").value;
-
-
-        const uzivatelInfo = [jm, pr, v, un, ps];
-        if(jm == ""){
-            alert("chybí jméno");
-        }else if(pr == ""){
-            alert("chybí příjmení");
-        }else if(v == ""){
-            alert("chybí věk");
-        }else if(un == ""){
-            alert("chybí uživatelské jméno");
-        }else if(ps == ""){
-            alert("chybí heslo");
-        }else{
-        document.getElementById("demo").innerHTML = uzivatelInfo;
-         }
-}
-
-
-</script>
-
-
-
-
-<div class="row" >
-
-    <div class="col-sm-12" id="obrOsa" style="background-color: black; width: auto; height: 150px;">
-        <img src="osaOb.png" alt="osaObr" style="height: 100%;">
-    </div>
-
-</div>
+<iframe class="patka" src="paticka.html" scrolling="no"; style="height: 200px;"></iframe>
 
 
 </body>
+
+
 </html>
 

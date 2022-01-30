@@ -6,7 +6,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="databaze.js"></script>
-    <script src="ostatnijs.js"></script>
     <link rel="stylesheet" href="osakosmetika.css">
 
 </head>
@@ -17,114 +16,38 @@
 <div class="row" >
 
     <div class="col-sm-9" style="color: white; margin-top: 50px; margin-left: 50px; margin-bottom: 50px; ">
-        <h1 style="font-size: 70px;">Časová osa</h1>
-        <h2 style="color: #ff0000ff; ">Zaznamenejte důležitý milník Vašeho života.</h2>
+        <iframe class="titulka" src="titulnistr.html" scrolling="no";></iframe>
     </div>
 
     <div class="col-sm-2" style="text-align: right;">
-        <button type="button" class="tlacitko" onclick="novy()">Nový uživatel</button>
-        <button type="button" class="tlacitko" onclick="stavajici()">Již existující uživatel</button>
+        <button type="button" class="tlacitko" onclick="window.location ='osanovy.html'">Nový uživatel</button>
+        <button type="button" class="tlacitko" onclick="window.location = 'osastavajici.html'">Již existující uživatel</button>
     </div>
 
-
-
-
 </div>
-
 
 <div class="row" >
 
     <div class="col-sm-12" id="hlavni" style="background-color: white; width: auto; height: 380px; margin: 20px;">
         <h2>Stávající uživatel</h2>
         <p>Pokud jsi již registrovaný, vyplň své ověřovací údaje.</p>
-        <form action=" " name="existujiciUzivatel" method="get">
-            <label for="username">Uživatelské jméno:</label><br>
-            <input type="text" id="username" name="username" value=""><br>
-            <label for="pass">Heslo:</label><br>
-            <input type="password" id="pass" name="pass" value=""><br><br>
-            <input type="button" value="Přihlásit se" onclick="prihlaseni()">
-        </form>
+
+            <p>
+                <label for="userName">Uživatelské jméno:</label>
+                <input type="text" id="userName" value="">
+            </p>
+
+            <p><button id="prihl" onclick="overUzivatele();">Přihlásit se</button></p>
+
+        <p id="vypis"></p>
+
+
     </div>
 
 </div>
 
-<script>
-function prihlaseni(){
 
-var un = document.getElementById("username").value;
-var ps = document.getElementById("pass").value;
-const uzivatelInfo = [un, ps];
-
-    if(un == ""){
-        alert("chybí uživatelské jméno");
-    }else if(ps == ""){
-        alert("chybí heslo");
-    }else{
-        window.location.replace("prihlaseno.html");
-    }
-
-
-}
-
-function prihlasUzivatele(){
-    
-
-}
-
-
-    vratStudenty(){
-        const trans = this._db.transaction('studenti', 'readonly');
-        trans.oncomplete = (ev) => {
-            console.log('vypis studentu OK');
-        }
-        trans.onerror = (ev) => {
-            console.log ('trans vypis studentu selhal - CHYBA', ev.target.errorCode);
-        }
-        const studenti = trans.objectStore('studenti');
-        const openKurzor = studenti.openCursor();
-        openKurzor.onsuccess = (ev) => {
-            const kurzor = ev.target.result;
-
-            /// záznam existuje
-            if(kurzor) {
-                console.log(kurzor.value, kurzor.key);
-                curzor.continue();
-
-
-            ///už není další záznam
-            }else{
-                console.log("Data vypsána");
-            }
-
-
-
-        }
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
-
-
-<div class="row" >
-
-    <div class="col-sm-12" id="obrOsa" style="background-color: black; width: auto; height: 150px;">
-        <img src="osaOb.png" alt="osaObr" style="height: 100%;">
-    </div>
-
-</div>
+<iframe class="patka" src="paticka.html" scrolling="no"; style="height: 200px;"></iframe>
 
 
 </body>
