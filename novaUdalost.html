@@ -47,10 +47,16 @@
 
             <label for="osa" style="margin-top: 20 px;">Vyberte typ vkládané události.</label>
         <form>
-                <select name="osa" id="osa" onclick="vyberTyp()">
-                    <option value="1">test1</option>
-                    <option value="2" selected="selected">test2</option>
-                    <option value="3">test3</option>
+                <select name="osa" id="osa">
+                    <script>
+                        let pocetTypu = uzivatele.action.typ.length;
+                            for(let i = 0; i < pocetTypu; i++){
+                                    const optionVolba4 = document.createElement("option");
+                                    optionVolba4.textContent = uzivatele.action.typ[i];
+                                    osa.appendChild(optionVolba4);
+                        }
+                        const menu = document.querySelector('#osa');
+                    </script>
                 </select>
         </form>
 
