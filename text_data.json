@@ -1,0 +1,40 @@
+ [{
+  "username": "dzesspi",
+  "firstname": "Tereza",
+  "lastname": "Kotyzová",
+  "age": 32,
+  "administrator": true,
+  "action": {
+    "what": "něco co se stalo",
+    "date": "2022-01-01",
+    "typ": ["narození", "úmrtí", "stěhování", "koncert", "kino"]
+  }
+
+},
+ {
+ "username": "Karolina",
+ "firstname": "Kája",
+ "lastname": "Chládková",
+ "age": 35,
+ "administrator": true,
+ "action": {
+ "what": "něco co se stalo",
+ "date": "2022-04-04",
+ "typ": ["narození", "úmrtí", "stěhování", "koncert", "kino"]
+ }
+
+ },
+   {
+     "username": "Pavlína",
+     "firstname": "Pavla",
+     "lastname": "Červinková",
+     "age": 35,
+     "administrator": false,
+     "action": {
+       "what": "něco co se stalo",
+       "date": "2022-12-24",
+       "typ": ["narození", "úmrtí", "stěhování", "koncert", "kino"]
+     }
+
+   }
+ ]

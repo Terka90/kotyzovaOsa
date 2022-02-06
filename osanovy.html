@@ -1,0 +1,88 @@
+<html>
+
+<meta charset="UTF-8">
+<title>Časová osa</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="databaze.js"></script>
+
+<link rel="stylesheet" href="osakosmetika.css">
+
+<body>
+
+<div class="row" >
+
+    <div class="col-sm-9" style="color: white; margin-top: 50px; margin-left: 50px; margin-bottom: 50px; ">
+        <iframe class="titulka" src="titulnistr.html" scrolling="no";></iframe>
+    </div>
+
+    <div class="col-sm-2" style="text-align: right;">
+        <button type="button" class="tlacitko" onclick="window.location='osanovy.html'">Nový uživatel</button>
+        <button type="button" class="tlacitko" onclick="window.location='osastavajici.html'">Stávající uživatel</button>
+    </div>
+
+</div>
+
+<div class="row" >
+
+    <div class="col-sm-12" id="hlavni" style="background-color: white; width: auto; height: 380px; margin: 20px;">
+        <h2>Nový uživatel</h2>
+        <p>Pokud jste na této stránce poprvé, bylo by dobré vyplnit pár údajů, potřebných k vaší registraci. Poté můžete vesele vkládat vaše události.</p>
+        <div class="row">
+            <div class="col-sm-5" >
+
+
+                    <fieldset>
+                        <p>
+                            <label for="userName">Uživatelské jméno:</label>
+                            <input type="text" id="userName" placeholder="Uživatelské jméno" required />
+                        </p>
+                        <p>
+                            <label for="fName">Jméno:</label>
+                            <input type="text" id="fName" value="" required />
+                        </p>
+                        <p>
+                            <label for="lName">Příjmení:</label>
+                            <input type="text" id="lName" value="" required />
+                        </p>
+                        <p>
+                            <label for="age">Věk:</label>
+                            <input type="text" inputmode="numeric" pattern=[\d]+ id="age" required />
+                        </p>
+                        <p>
+                            <button id="reg" onclick="registruj();">Vytvořit účet</button>
+                        </p>
+
+                    </fieldset>
+
+
+            </div>
+
+
+            <div class="col-sm-6" >
+
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<iframe class="patka" src="paticka.html" scrolling="no"; style="height: 200px;"></iframe>
+
+
+</body>
+
+
+</html>
+

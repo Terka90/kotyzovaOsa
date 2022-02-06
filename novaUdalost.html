@@ -1,0 +1,90 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Časová osa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="databaze.js"></script>
+    <link rel="stylesheet" href="osakosmetika.css">
+
+</head>
+
+<body>
+
+<div class="row" >
+
+    <div class="col-sm-9" style="color: white; margin-top: 50px; margin-left: 50px; margin-bottom: 50px; ">
+        <iframe class="titulka" src="titulnistr.html" scrolling="no";></iframe>
+    </div>
+
+    <div class="col-sm-2" style="text-align: right;">
+        <button type="button" class="tlacitko" onclick=" " style="background-color: red; color: black;">Přihlášeno</button>
+        <button type="button" class="tlacitko" onclick="odhlasit()">Odhlásit</button>
+    </div>
+
+
+
+
+</div>
+
+
+<div class="row" >
+
+    <div class="col-sm-3" id="menu" style="background-color: white; width: auto; height: 380px; ">
+        <button type="button" class="tlacitko" onclick="window.location='prohlizet.html'" style="margin: 20px;">Prohlížet události</button>
+        <button type="button" class="tlacitko" onclick="window.location='novaUdalost.html'" style="margin: 20px;">Nová událost</button>
+    </div>
+
+
+    <div class="col-sm-4" id="hlavni" style="background-color: white; width: auto; height: 380px;">
+        <br>
+        <p>Na této stránce můžete vkládat údaje do časové osy.</p>
+
+            <label for="nazevudalosti">Uveďte název události:</label>
+                <input type="text" id="nazevudalosti" name="nazevudalosti" value=""><br>
+
+            <label for="osa" style="margin-top: 20 px;">Vyberte typ vkládané události.</label>
+        <form>
+                <select name="osa" id="osa">
+                    <script>
+                        let pocetTypu = uzivatele.action.typ.length;
+                            for(let i = 0; i < pocetTypu; i++){
+                                    const optionVolba4 = document.createElement("option");
+                                    optionVolba4.textContent = uzivatele.action.typ[i];
+                                    osa.appendChild(optionVolba4);
+                        }
+                        const menu = document.querySelector('#osa');
+                    </script>
+                </select>
+        </form>
+
+            <br>
+            <label for="datUdalostiOd">Vyberte začátek události:</label>
+            <input type="date" id="datUdalostiOd" name="datUdalostiOd" value=""><br>
+
+
+            <br>
+            <input type="button" value="Vložit" onclick="vlozDataUdalosti()" style="margin-top: 5px;">
+
+
+    </div>
+
+    <div class="col-sm-5" id="vypisovani" style="background-color: white; width: auto; height: 380px;">
+        <p id="prezdivkaUzivatele"></p>
+        <p id="udalostivypis"></p>
+
+    </div>
+
+
+
+
+</div>
+
+<iframe class="patka" src="paticka.html" scrolling="no"; style="height: 200px;"></iframe>
+
+
+</body>
+</html>
+

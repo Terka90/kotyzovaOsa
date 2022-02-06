@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Časová osa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="databaze.js"></script>
+    <link rel="stylesheet" href="osakosmetika.css">
+
+</head>
+
+<body>
+
+
+<div class="row" >
+
+    <div class="col-sm-9" style="color: white; margin-top: 50px; margin-left: 50px; margin-bottom: 50px; ">
+        <iframe class="titulka" src="titulnistr.html" scrolling="no";></iframe>
+    </div>
+
+    <div class="col-sm-2" style="text-align: right;">
+        <button type="button" class="tlacitko" onclick="window.location ='osanovy.html'">Nový uživatel</button>
+        <button type="button" class="tlacitko" onclick="window.location = 'osastavajici.html'">Již existující uživatel</button>
+    </div>
+
+</div>
+
+<div class="row" >
+
+    <div class="col-sm-12" id="hlavni" style="background-color: white; width: auto; height: 380px; margin: 20px;">
+        <h2>Stávající uživatel</h2>
+        <p>Pokud jsi již registrovaný, vyplň své ověřovací údaje.</p>
+
+            <p>
+                <label for="userName">Uživatelské jméno:</label>
+                <input type="text" id="userName" value="">
+            </p>
+
+            <p><button id="prihl" onclick="overUzivatele();">Přihlásit se</button></p>
+
+        <p id="vypis"></p>
+
+
+    </div>
+
+</div>
+
+
+<iframe class="patka" src="paticka.html" scrolling="no"; style="height: 200px;"></iframe>
+
+
+</body>
+</html>
+
