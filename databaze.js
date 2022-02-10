@@ -1,4 +1,4 @@
-//ŠABLONA - data, co chci zaznamenávat
+//ŠABLONA JSON- data, co chci zaznamenávat
         const uzivatele = {
             "username": "dzesspi",
             "firstname": "Tereza",
@@ -10,7 +10,6 @@
                     "date": "2022-01-01",
                     "typ": ["narození", "úmrtí", "stěhování", "koncert", "kino"]
                     },
-             
             }
 
 //=======třída UŽIVATEL
@@ -22,7 +21,6 @@ class Uzivatel{
         this.age = age;
         this.administrator = administrator;
     }
-
 }
 //======třída UDÁLOST
 class Udalost extends Uzivatel{
@@ -32,51 +30,45 @@ class Udalost extends Uzivatel{
         this.kdy = kdy;
         this.typ = typ;
     }
-
 }
 
-
- function vytvorTridu(){
-     //let prezdivka = document.getElementById("userName").value;
-     //let krestni = document.getElementById("fName").value;
-     //let prijmeni = document.getElementById("lName").value;
-     //let letapane = document.getElementById("age").value;
-
-
-        const uz = new Udalost("dzesspi", "terka", "kotyzova", 32, null, "nevim co", "2022-01-03", "narození");
-        console.log(uz);
-
-        const zapisUz = JSON.stringify(uz);
-        console.log(zapisUz);
- }
-
-
-
-
-
-
-// V PODSTATĚ JEN VYTVOŘÍ UŽIVATELE, ALE NEEVIDUJE U NĚJ ŽÁDNÉ AKCE
+//=================================== V PODSTATĚ JEN VYTVOŘÍ UŽIVATELE, ALE NEEVIDUJE U NĚJ ŽÁDNÉ AKCE
 function registruj(){
 //userName; fName; lName; age
-
-    //console.log(JSON.stringify(uzivatele));
-        console.log("============================");
-
     let prezdivka = document.getElementById("userName").value;
     let krestni = document.getElementById("fName").value;
     let prijmeni = document.getElementById("lName").value;
     let letapane = document.getElementById("age").value;
 
-    const uz = {"username": prezdivka, "firstname": krestni, "lastname": prijmeni, "age": letapane, "administrator": false, "action": {"what": null, "date": null, "typ": ["null"]}}
+// zkontroluje, jestli v inputech nechybí povinné údaje
+    if(document.getElementById("userName").value == ""){
+        console.log("Je to prázdný!");
+    }else if(document.getElementById("fName").value == ""){
+                 console.log("Je to prázdný!");
+    }else if(document.getElementById("lName").value == ""){
+                 console.log("Je to prázdný!");
+    }else if(document.getElementById("age").value == ""){
+                  console.log("Je to prázdný!");
+    }else{
+//pokud údaje nechybí, pak vezme to co je v inputech a vloží to do JSON struktury dat
+ const uz = {"username": prezdivka, "firstname": krestni, "lastname": prijmeni, "age": letapane, "administrator": false, "action": {"what": null, "date": null, "typ": ["null"]}}
 
     console.log(JSON.stringify(uz));
 console.log("============================");
     console.log(JSON.parse(JSON.stringify(uz)));
 
+//práce s Local Storage
+    if (typeof(Storage) !== "undefined") {
+      console.log("vytvořeno");
+      var stringUz = JSON.stringify(uz);
+      localStorage.setItem(prezdivka, stringUz);
 
+    } else {
+      console.log("problém");
+    }
 
 //vložení dat do souboru    - DODĚLAT!!!
-            getText("text_data.json");  //zavolám fci, která má nahrát text ze souboru
+           /* getText("text_data.json");  //zavolám fci, která má nahrát text ze souboru
             async function getText(file) {
               let x = await fetch(file);
               let y = await x.text();
@@ -86,7 +78,7 @@ console.log("============================");
               let prezdivka1 = JSON.parse(y);
 
 
-            }
+            }*/
 
 
 //text ve formuláři nastaví na prázdno
@@ -94,27 +86,13 @@ console.log("============================");
     document.getElementById("fName").value = "";
     document.getElementById("lName").value = "";
     document.getElementById("age").value = "";
-
 }
-
-
-
-
-
-
-
-
-//vypíše uživatele, který vkládá událost
-function vypisUzivatele(){
-    document.getElementById("vypis").innerHTML = uzivatelZInput;
 }
-
-
-
-
 
 //======================OVĚŘENÍ UŽIVATELE PŘI PŘIHLAŠOVÁNÍ (JESTLI UŽ JE V "DATABÁZI")
 function overUzivatele(){
+    let prihlasenyUzivatel;
+
 
     //nejdřív zkontroluji, jestli mám v textovém okně nějakou hodnotu
     if(document.getElementById("userName").value == ""){
@@ -123,8 +101,8 @@ function overUzivatele(){
 
     //pokud tam tu hodnotu mám, tak ji porovnám, jestli už náhodou neexistuje
     }else{
+            //==========KONTROLA DAT Z EXTERNÍHO SOUBORU
             let uzivatelZInput = document.getElementById("userName").value;
-
             getText("text_data.json");  //zavolám fci, která má nahrát text ze souboru
             async function getText(file) {
               let x = await fetch(file);
@@ -136,11 +114,7 @@ function overUzivatele(){
                                                         this.key = key;
                                                         this.value = value;
                                                     });
-              //console.log(vypis[0]);
-              //let data = vypis[0].username;
-              //console.log(data);
-
-
+              //==VÝPIS VŠECH UŽIVATELŮ V EXTERNÍM SOUBORU
               let pocetUzivateluDB = vypis.length;
               console.log(pocetUzivateluDB);
               let status;
@@ -153,18 +127,140 @@ function overUzivatele(){
                             }else{ console.log("2. data:" + data + "; input: " + uzivatelZInput);}
                       }
                  if(status == "ok"){
-                    console.log("přihlášen");
-                    const prihlasenyUzivatel = uzivatelZInput;
+                    console.log("Nalezen v externím souboru");
+
+                    localStorage.setItem("prihlasen", uzivatelZInput);
                     window.location.href = "prihlaseno.html";
-                 }else{alert("nejsi registrován");}
+
+
+                        //práce s Local Storage
+                        if (typeof(Storage) !== "undefined") {
+                          console.log("vytvořeno");
+
+                          //VLEZE DO LOCALSTORAGE A ZJISTÍ DATA UŽIVATELE
+                          localStorage.setItem("prihlasen", uzivatelZInput);
+
+                          localStorage.getItem(uzivatelZInput);
+                          console.log("Uzivatel z Input: " + uzivatelZInput);
+
+                        } else {
+                          console.log("problém");
+                        }
+
+
+//========================================
+                 }else{
+                   //KONTROLA UŽIVATELE Z LOCAL STORAGE
+                                            let uzivZInput = document.getElementById("userName").value;
+                                            if (typeof(Storage) !== "undefined") {
+                                               console.log("Lezu do LS");
+                                                 let uzivZLS = localStorage.getItem(uzivZInput);
+                                                 console.log(uzivZLS);
+                                                // localStorage.getItem(uzivatelZInput);
+                                                 if(uzivZLS == null){
+                                                    console.log("uzivatel neznámý");
+                                                 }else{
+                                                    console.log("nalezen v LS");
+
+
+                                                    window.location.href = "prihlaseno.html";
+                                                    localStorage.setItem("prihlasen", uzivatelZInput);
+                                                    }
+
+
+                                             } else {
+                                               console.log("problém");
+                                             }
+
                  }
                 }
             }
+ }
+
+
+//=================VLOŽENÍ UDÁLOSTI
+function vlozDataUdalosti(){
+
+
+                //HODNOTY PŘEDVYPLNĚNÉ (PŘEZDÍVKA, JMÉNO, PŘÍJMENÍ, VĚK, ADMINISTRÁTOR)
+                //vytažení dat z LocalStorage
+
+                                var udaje = localStorage.getItem("prihlasen"); //tohle vypíše jméno přihlášeného uživatele
+                                var udaje2 = localStorage.getItem(udaje); // tohle vypíše data přihlášeného uživatele
+                                //console.log(udaje);
+                                //console.log(udaje2);
+                                //console.log("===================");
+
+                                var datazLS = JSON.parse(udaje2);
+                                var pr = datazLS.username;
+
+                                var jme = datazLS.firstname;
+                                var pri = datazLS.lastname;
+                                var ag = datazLS.age;
+
+   //console.log("uzivatel: " + pr +", "+ jme +", "+ pri +", "+ ag);
+
+                //HODNOTY TAHANÉ Z INPUT FORMULÁŘE (WHAT, DATE, TYP)       //nazevudalosti  ;   datUdalostiOd     ; osa
+                            let co = document.getElementById("nazevudalosti").value;
+                            let da = document.getElementById("datUdalostiOd").value;
+
+                //výběr typu události
+                            var selectU = document.getElementById("osa");
+                            var vyberU = selectU.options[selectU.selectedIndex].text;
+                            //console.log("typ události: " + vyberU);
+                            let typU = vyberU;
+
+
+ const uzi = {"username": pr, "firstname": jme, "lastname": pri, "age": ag, "administrator": false, "action": {"what": co, "date": da, "typ": vyberU}}
+
+
+                     if (typeof(Storage) !== "undefined") {
+
+                            let cislo = localStorage.getItem("id_dataLS");
+                                    //console.log(cislo);
+                            let id_dataLS = localStorage.getItem("id_dataLS"); //do LS vkládám data, na která se pohodlně dostanu a nepřepíšu si je
+                                    //console.log("id: " + id_dataLS);
+
+
+                          if(cislo == null){
+
+                                            //console.log("číslo ještě neexistuje");
+                                    cislo = 0;
+                                    localStorage.setItem("id_dataLS", cislo);
+                                    localStorage.setItem(cislo, JSON.stringify(uzi)); //toto je řetěžec, který se vkládá do LS
+
+                          }else if(cislo == 0){
+                                            //console.log("nula už tam je");
+                                    cislo = parseInt(cislo) + 1 ;
+                                    localStorage.setItem("id_dataLS", cislo);
+                                    localStorage.setItem(cislo, JSON.stringify(uzi)); //toto je řetěžec, který se vkládá do LS
+                           }else{
+                                            //console.log("máme řadu??");
+                                   cislo = parseInt(cislo) + 1 ;
+                                   localStorage.setItem("id_dataLS", cislo);
+                                   localStorage.setItem(cislo, JSON.stringify(uzi)); //toto je řetěžec, který se vkládá do LS
+                           }
 
 
 
+                        } else {
+                           console.log("problém");
+                        }
 
 
+                        
+//========================VYMYSLET LEPŠÍ VÝPIS AKCÍ (TAHAT AKCE Z LOCALSTORAGE)
+                                const node = document.createElement("li");  //odrážkový seznam
+                                const textinput = da + ", "  + co + ", " + typU;
+                                const textnode = document.createTextNode(textinput); //hodí do položky text
+                                node.appendChild(textnode);  //do odrážkového seznamu hodí text z textnode
+
+                                document.getElementById("udalostivypis").appendChild(node);  //to co je v node tak vypíše v document.getelement
+
+        document.getElementById("nazevudalosti").value = "";
+
+
+}
 
 
 
@@ -175,74 +271,62 @@ function ukaz(){
     var selectUd = document.getElementById("osa");
     var vyberUd = selectUd.options[selectUd.selectedIndex].text;
     var pocetTyp = uzivatele.action.typ.length;
-
-    document.getElementById("prezdivkaUzivatele").innerHTML = uzivatele.["username"];
-
+    var vyberTypu;
 
     switch(vyberUd){
 
-        case uzivatele.action.typ[0]: document.getElementById("udalostivypis").innerHTML = uzivatele.action.typ[0] +": " + uzivatele.action["date"] + " - " + uzivatele.action["what"];
+        case uzivatele.action.typ[0]: vyberTypu = uzivatele.action.typ[0];
         break;
-        case uzivatele.action.typ[1]: document.getElementById("udalostivypis").innerHTML = uzivatele.action.typ[1] +": " + uzivatele.action["date"] + " - " + uzivatele.action["what"];
+        case uzivatele.action.typ[1]: vyberTypu = uzivatele.action.typ[1];
         break;
-        case uzivatele.action.typ[2]: document.getElementById("udalostivypis").innerHTML = uzivatele.action.typ[2] +": " + uzivatele.action["date"] + " - " + uzivatele.action["what"];
+        case uzivatele.action.typ[2]: vyberTypu = uzivatele.action.typ[2];
         break;
-        case uzivatele.action.typ[3]: document.getElementById("udalostivypis").innerHTML = uzivatele.action.typ[3] +": " + uzivatele.action["date"] + " - " + uzivatele.action["what"];
+        case uzivatele.action.typ[3]: vyberTypu = uzivatele.action.typ[3];
         break;
-        case uzivatele.action.typ[4]: document.getElementById("udalostivypis").innerHTML = uzivatele.action.typ[4] +": " + uzivatele.action["date"] + " - " + uzivatele.action["what"];
+        case uzivatele.action.typ[4]: vyberTypu = uzivatele.action.typ[4];
         break;
+    }
 
+//VLEZU DO LS A VYTÁHNU DATA PŘIHLÁŠENÉHO UŽIVATELE
 
+if (typeof(Storage) !== "undefined") {
+let index = localStorage.getItem("id_dataLS");
+console.log(index);
+    for(let i = 0; i <= index; i++){
+                let uzivZLS = localStorage.getItem("prihlasen");
+                let cislo = i;
+                console.log("přihlášený uživatel: " + uzivZLS);
+
+                //zjistím si jméno přihlášeného uživatele a to jméno potom budu porovnávat se jmény uživatelů v LS
+                let prvniUzivatel = localStorage.getItem(cislo); // vrátí stringify prvního uživatele (0)
+                let prUz = JSON.parse(prvniUzivatel);
+                console.log("stringify username: " + prUz.username);
+                if(prUz.username == uzivZLS){
+                    if(prUz.action.typ == vyberTypu ){
+
+                            const node = document.createElement("li");  //odrážkový seznam
+                            const textinput = vyberTypu +": " + prUz.action["date"] + " - " + prUz.action["what"];
+                            const textnode = document.createTextNode(textinput); //hodí do položky text
+                            node.appendChild(textnode);  //do odrážkového seznamu hodí text z textnode
+
+                            document.getElementById("udalostivypis").appendChild(node);  //to co je v node tak vypíše v document.getelement
+
+                    }
+
+                }
     }
 
 
-
+} else {
+     console.log("problém");
 }
-
-//=================VLOŽENÍ UDÁLOSTI
-function vlozDataUdalosti(){
-
-
-                //HODNOTY PŘEDVYPLNĚNÉ (PŘEZDÍVKA, JMÉNO, PŘÍJMENÍ, VĚK, ADMINISTRÁTOR)
-                                var pr = uzivatele["username"];
-                                var jme = uzivatele["firstname"];
-                                var pri = uzivatele["lastname"];
-                                var ag = uzivatele["age"];
-
-                //HODNOTY TAHANÉ Z FORMULÁŘE (WHAT, DATE, TYP)       //nazevudalosti  ;   datUdalostiOd     ; osa
-                            let co = document.getElementById("nazevudalosti").value;
-                            let da = document.getElementById("datUdalostiOd").value;
-
-                //výběr typu události
-                            var selectU = document.getElementById("osa");
-                            var vyberU = selectU.options[selectU.selectedIndex].text;
-                            //console.log(vyberU);
-                            let typU = vyberU;
-
-
- const uzi = {"username": pr, "firstname": jme, "lastname": pri, "age": ag, "administrator": false, "action": {"what": co, "date": da, "typ": ["typU"]}}
-
-
-
-         document.getElementById("prezdivkaUzivatele").innerHTML = uzi["username"];
-         //document.getElementById("udalostivypis").innerHTML = uzi.action["what"] + ", " + uzi.action["date"] + ", " + uzi.action["typ"];
-
-                                const node = document.createElement("li");  //odrážkový seznam
-                                const textinput = da + ", "  + co + ", " + typU;
-                                const textnode = document.createTextNode(textinput); //hodí do položky text
-                                node.appendChild(textnode);  //do odrážkového seznamu hodí text z textnode
-
-                                document.getElementById("udalostivypis").appendChild(node);//to co je v node tak vypíše v document.getelement
-
-        document.getElementById("nazevudalosti").value = "";
 
 
 }
 
 
-
-
+// ODHLÁŠENÍ UŽIVATELE
 function odhlasit(){
-    window.location.href = "osaobsah.html";
+    window.location.href = "index.html";
 }
 

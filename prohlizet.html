@@ -64,13 +64,13 @@
         <br>
 
         <input type="button" value="Ukaž data" onclick="ukaz()" style="margin-top: 5px;">
-        <input type="button" value="Vytvoř třídu" onclick="vytvorTridu()" style="margin-top: 5px;">
+
 
 
 
     </div>
     <div class="col-sm-5" id="vypisovani" style="background-color: white; width: auto; height: 380px;">
-        <p id="prezdivkaUzivatele"></p>
+        <p id="prezdivkaUzivatele"><script>document.getElementById("prezdivkaUzivatele").innerHTML = localStorage.getItem("prihlasen");</script></p>
         <p id="udalostivypis"></p>
 
     </div>
